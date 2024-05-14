@@ -24,7 +24,7 @@ import com.bloomberg.fxdealwarehouseapi.exceptions.InvalidDealFieldsException;
  */
 public class FXDealValidatorTest {
 	
-	
+
 	@Test
 	public void testCheckIfDealIDEmpty() {
 		
