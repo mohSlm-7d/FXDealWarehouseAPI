@@ -26,7 +26,7 @@ public class FXDealValidator {
 			throw new InvalidDealFieldsException("The deal's ID cannot be empty.");
 		}
 		
-		if(dealToValidate.getDealTimestamp().equals(null) ) {
+		if(dealToValidate.getDealTimestamp() == null ) {
 			FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's dealTimestamp Field is empty]");
 			throw new InvalidDealFieldsException("The Timestamp of the deal cannot be empty.");
 		}
@@ -68,43 +68,29 @@ public class FXDealValidator {
 	}
 	
 	
-	private void validateDealFromCurrencyISOCode(FXDeal dealToValidate) throws InvalidDealFieldsException{
+	private void validateDealCurrencyISOCode(String isoCode) throws InvalidDealFieldsException{
 		
 		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: Checking whether the new FXDeal's fromCurrencyISOCode Field is valid or not]");
 
-		Pattern dealFromCurrencyISOCodePattern = Pattern.compile("^[0-9]{3}$");
-		Matcher dealFromCurrencyISOCodeMatcher = dealFromCurrencyISOCodePattern.matcher(dealToValidate.getFromCurrencyISOCode());
+		Pattern dealCurrencyISOCodePattern = Pattern.compile("^[0-9]{3}$");
+		Matcher dealCurrencyISOCodeMatcher = dealCurrencyISOCodePattern.matcher(isoCode);
 		
-		if(!dealFromCurrencyISOCodeMatcher.find()) {
-			FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's fromCurrencyISOCode Field is NOT VALID]");
-			throw new InvalidDealFieldsException("The FX Deal's From Currency ISO Code must be a String that contains exactly 3 digits with no spaces.");
+		if(!dealCurrencyISOCodeMatcher.find()) {
+			FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's From or/and To CurrencyISOCode Fields are NOT VALID]");
+			throw new InvalidDealFieldsException("The FX Deal's Currency ISO Codes must be String that contain exactly 3 digits with no spaces.");
 		}
 		
-		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's fromCurrencyISOCode Field IS VALID]");
+		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's From or/and To CurrencyISOCode Fields ARE VALID]");
 	}
 	
-	private void validateDealToCurrencyISOCode(FXDeal dealToValidate) throws InvalidDealFieldsException{
 		
-		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: Checking whether the new FXDeal's toCurrencyISOCode Field is valid or not]");
-		
-		Pattern dealToCurrencyISOCodePattern = Pattern.compile("^[0-9]{3}$");
-		Matcher dealToCurrencyISOCodeMatcher = dealToCurrencyISOCodePattern.matcher(dealToValidate.getToCurrencyISOCode());
-		
-		if(!dealToCurrencyISOCodeMatcher.find()) {
-			FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's toCurrencyISOCode Field is NOT VALID]");
-			throw new InvalidDealFieldsException("The FX Deal's To Currency ISO Code must be a String that contains exactly 3 digits with no spaces.");
-		}
-		
-		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's toCurrencyISOCode Field IS VALID]");
-	}
-	
 	private void validateDealTimestamp(FXDeal dealToValidate) throws InvalidDealFieldsException{
 		
 		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: Checking whether the new FXDeal's dealTimestamp Field is valid or not]");
 
 		if(dealToValidate.getDealTimestamp().isBefore(LocalDateTime.now())) {
 			FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's dealTimestamp Field is NOT VALID]");
-			throw new InvalidDealFieldsException("The FX Deal's From Currency ISO Code must be a String that contains exactly 3 digits with no spaces.");
+			throw new InvalidDealFieldsException("The FX Deal's Timestamp must be today or in future.");
 		}
 		
 		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's dealTimestamp Field IS VALID]");
@@ -137,9 +123,9 @@ public class FXDealValidator {
 		this.checkIfFieldsEmpty(dealToValidate);
 		
 		this.validateDealId(dealToValidate);
-		this.validateDealFromCurrencyISOCode(dealToValidate);
+		this.validateDealCurrencyISOCode(dealToValidate.getFromCurrencyISOCode());
 		this.validateDealAmount(dealToValidate);
-		this.validateDealToCurrencyISOCode(dealToValidate);
+		this.validateDealCurrencyISOCode(dealToValidate.getToCurrencyISOCode());
 		this.validateDealTimestamp(dealToValidate);
 		
 		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's Fields are all valid]");

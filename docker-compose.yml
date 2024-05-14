@@ -1,0 +1,11 @@
+# docker-compose.yml
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 101001#Amem
+      MYSQL_DATABASE: fx_deal_warehouse_system

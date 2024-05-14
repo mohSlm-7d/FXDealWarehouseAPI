@@ -47,11 +47,25 @@ public class FXDeal {
 	
 	
 	
+//	
 	
-	
+	/**
+	 * @return
+	 */
 	public int getSequentialId() {
 		return sequentialId;
 	}
+
+	public FXDeal(int sequentialId, String dealId, String fromCurrencyISOCode, String toCurrencyISOCode,
+		LocalDateTime dealTimestamp, String dealAmount) {
+	super();
+	this.sequentialId = sequentialId;
+	this.dealId = dealId;
+	this.fromCurrencyISOCode = fromCurrencyISOCode;
+	this.toCurrencyISOCode = toCurrencyISOCode;
+	this.dealTimestamp = dealTimestamp;
+	this.dealAmount = dealAmount;
+}
 
 	public void setSequentialId(int sequentialId) {
 		this.sequentialId = sequentialId;
