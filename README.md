@@ -33,7 +33,7 @@
  	https://app.getpostman.com/join-team?invite_code=56e637b07e58a0ab47951aeabb924495&target_code=9988be92890e097334fff8e9612acf40.
   
   # Validation rules of the FXDeal Bean Fields:
-   1. dealId: It must be Unique and it is an Alphanumeric String and its length must be at least of 8 characters and does not exceed 20 characters. The FX Deal's ID cannot contain spaces. 
+   1. dealId: It has a unique Unique Constraint on the Database, and it is an Alphanumeric String and its length must be at least of 8 characters and does not exceed 20 characters. The FX Deal's ID cannot contain spaces. 
    2. fromCurrencyISOCode: The FX Deal's Currency ISO Codes must be String that contain exactly 3 digits with no spaces.
    3. toCurrencyISOCode: The FX Deal's Currency ISO Codes must be String that contain exactly 3 digits with no spaces.
    4. dealTimestamp: The FX Deal's Timestamp must be today or in future.
