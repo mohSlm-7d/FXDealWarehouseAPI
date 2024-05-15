@@ -5,6 +5,7 @@ package com.bloomberg.fxdealwarehouseapi.validations;
 
 import static org.junit.Assert.assertThrows;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
@@ -29,7 +30,7 @@ public class FXDealValidatorTest {
 	public void testCheckIfDealIDEmpty() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "", "400", "740", LocalDateTime.now(), "7854123");
+		FXDeal dealToValidate = new FXDeal(123456, "", "400", "740", Timestamp.valueOf(LocalDateTime.now()), "7854123");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -47,7 +48,7 @@ public class FXDealValidatorTest {
 	public void testCheckIfDealAmountEmpty() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345566", "400", "740", LocalDateTime.now(), "");
+		FXDeal dealToValidate = new FXDeal(123456, "12345566", "400", "740", Timestamp.valueOf(LocalDateTime.now()), "");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -64,7 +65,7 @@ public class FXDealValidatorTest {
 	public void testCheckIfDealFromCurrencyEmpty() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345566", "", "740", LocalDateTime.now(), "8774");
+		FXDeal dealToValidate = new FXDeal(123456, "12345566", "", "740", Timestamp.valueOf(LocalDateTime.now()), "8774");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -81,7 +82,7 @@ public class FXDealValidatorTest {
 	public void testCheckIfDealToCurrencyEmpty() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345566", "400", "", LocalDateTime.now(), "8774");
+		FXDeal dealToValidate = new FXDeal(123456, "12345566", "400", "", Timestamp.valueOf(LocalDateTime.now()), "8774");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -115,7 +116,7 @@ public class FXDealValidatorTest {
 	public void testValidateDealIDSpecialCharacter() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345566?", "400", "700", LocalDateTime.now(), "8774");
+		FXDeal dealToValidate = new FXDeal(123456, "12345566?", "400", "700", Timestamp.valueOf(LocalDateTime.now()), "8774");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -132,7 +133,7 @@ public class FXDealValidatorTest {
 	public void testValidateDealIDLessThan8() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "1234", "400", "700", LocalDateTime.now(), "8774");
+		FXDeal dealToValidate = new FXDeal(123456, "1234", "400", "700", Timestamp.valueOf(LocalDateTime.now()), "8774");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -149,7 +150,7 @@ public class FXDealValidatorTest {
 	public void testValidateDealIDMoreThan20() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "123456789123456789123", "400", "700", LocalDateTime.now(), "8774");
+		FXDeal dealToValidate = new FXDeal(123456, "123456789123456789123", "400", "700", Timestamp.valueOf(LocalDateTime.now()), "8774");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -167,7 +168,7 @@ public class FXDealValidatorTest {
 	public void testCurrncyIsoCodeLength() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345678", "9087", "700", LocalDateTime.now(), "8774");
+		FXDeal dealToValidate = new FXDeal(123456, "12345678", "9087", "700", Timestamp.valueOf(LocalDateTime.now()), "8774");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -184,7 +185,7 @@ public class FXDealValidatorTest {
 	public void testCurrncyIsoCodeWithAlpha() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345678", "908", "ISO", LocalDateTime.now(), "8774");
+		FXDeal dealToValidate = new FXDeal(123456, "12345678", "908", "ISO", Timestamp.valueOf(LocalDateTime.now()), "8774");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -202,7 +203,7 @@ public class FXDealValidatorTest {
 	public void testDealTimestampInPast() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345678", "908", "123", LocalDateTime.now().minus(1, ChronoUnit.DAYS), "8774");
+		FXDeal dealToValidate = new FXDeal(123456, "12345678", "908", "123", Timestamp.valueOf(LocalDateTime.now().minus(1, ChronoUnit.DAYS)), "8774");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -220,7 +221,7 @@ public class FXDealValidatorTest {
 	public void testDealAmountLessThanZero() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345678", "908", "ISO", LocalDateTime.now(), "0");
+		FXDeal dealToValidate = new FXDeal(123456, "12345678", "908", "ISO", Timestamp.valueOf(LocalDateTime.now()), "0");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;
@@ -237,7 +238,7 @@ public class FXDealValidatorTest {
 	public void testDealAmountLength() {
 		
 		FXDealValidator validator = new FXDealValidator();
-		FXDeal dealToValidate = new FXDeal(123456, "12345678", "908", "ISO", LocalDateTime.now(), "789456123658");
+		FXDeal dealToValidate = new FXDeal(123456, "12345678", "908", "ISO", Timestamp.valueOf(LocalDateTime.now()), "789456123658");
 	
 		InvalidDealFieldsException exception = assertThrows(InvalidDealFieldsException.class, () -> {
            validator.validateFXDeal(dealToValidate) ;

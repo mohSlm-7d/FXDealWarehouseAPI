@@ -26,7 +26,7 @@ public class FXDealController {
 	
 	/**
 	 * @param dealToImport
-	 * @return ResponseEntity<Object>
+	 * @return response
 	 * 
 	 * The saveDeal Method handles the requests to import the new FXDeals into the DB, and returns a proper response, which is returned 
 	 * by the saveDeal Method from the FXDealService that is invoked by the fxDealService bean instance.

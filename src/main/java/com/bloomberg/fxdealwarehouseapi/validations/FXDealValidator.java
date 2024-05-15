@@ -173,11 +173,11 @@ public class FXDealValidator {
 	 * and it cannot be empty(null), otherwise it will throw an InvalidDealFieldsException with a 
 	 * proper error message.
 	 */
-	private void validateDealTimestamp(LocalDateTime dealTimestamp) throws InvalidDealFieldsException{
+	private void validateDealTimestamp(Timestamp dealTimestamp) throws InvalidDealFieldsException{
 		
 		FxDealWarehouseApiApplication.logger.info("[FXDealValidator: Checking whether the new FXDeal's dealTimestamp Field is valid or not]");
 
-		if(dealTimestamp.isBefore(LocalDateTime.now())) {
+		if(dealTimestamp.before(Timestamp.valueOf(LocalDateTime.now()))) {
 			FxDealWarehouseApiApplication.logger.info("[FXDealValidator: The new FXDeal's dealTimestamp Field is NOT VALID]");
 			throw new InvalidDealFieldsException("The FX Deal's Timestamp must be today or in future.");
 		}

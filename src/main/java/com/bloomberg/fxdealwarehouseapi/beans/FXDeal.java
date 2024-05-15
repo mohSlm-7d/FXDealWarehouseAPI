@@ -2,8 +2,9 @@ package com.bloomberg.fxdealwarehouseapi.beans;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import org.springframework.stereotype.Component;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -37,13 +38,22 @@ public class FXDeal {
 	
 	@Column(nullable = false)
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime dealTimestamp;
+	private Timestamp dealTimestamp;
 	
 //	dealAmount in the fromCurrency be converted to the toCurrency.
 	@Column(nullable = false)
 	private String dealAmount;
 
 	
+	
+	
+	/**
+	 * 
+	 * A default constructor to build a bean of the FXDeal class.
+	 */
+	public FXDeal() {
+		super();
+	}
 	
 	
 	
@@ -59,7 +69,7 @@ public class FXDeal {
 	 * its details as arguments to the constructor.
 	 */
 	public FXDeal(int sequentialId, String dealId, String fromCurrencyISOCode, String toCurrencyISOCode,
-			LocalDateTime dealTimestamp, String dealAmount) {
+			Timestamp dealTimestamp, String dealAmount) {
 		super();
 		this.sequentialId = sequentialId;
 		this.dealId = dealId;
@@ -150,7 +160,7 @@ public class FXDeal {
 	 * @return dealTimestamp
 	 * A getter for the dealTimestamp field.
 	 */
-	public LocalDateTime getDealTimestamp() {
+	public Timestamp getDealTimestamp() {
 		return dealTimestamp;
 	}
 
@@ -159,7 +169,7 @@ public class FXDeal {
 	 * @param dealTimestamp
 	 * A setter for the dealTimestamp field.
 	 */
-	public void setDealTimestamp(LocalDateTime dealTimestamp) {
+	public void setDealTimestamp(Timestamp dealTimestamp) {
 		this.dealTimestamp = dealTimestamp;
 	}
 
