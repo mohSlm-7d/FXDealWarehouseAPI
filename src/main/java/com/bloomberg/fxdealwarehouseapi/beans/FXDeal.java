@@ -17,7 +17,7 @@ import jakarta.persistence.SequenceGenerator;
 /**
  * 
  */
-@Component
+
 @Entity
 public class FXDeal {
 	@Id
@@ -71,7 +71,7 @@ public class FXDeal {
 
 	
 	/**
-	 * @return int
+	 * @return sequentialId
 	 * A getter for the sequentialId field.
 	 */
 	public int getSequentialId() {
@@ -89,7 +89,7 @@ public class FXDeal {
 
 	
 	/**
-	 * @return String
+	 * @return dealId
 	 * A getter for the dealId field.
 	 */
 	public String getDealId() {
@@ -109,7 +109,7 @@ public class FXDeal {
 	
 	
 	/**
-	 * @return String
+	 * @return fromCurrencyISOCode
 	 * A getter for the FromCurrencyISOCode field.
 	 */
 	public String getFromCurrencyISOCode() {
@@ -128,7 +128,7 @@ public class FXDeal {
 	
 	
 	/**
-	 * @return String
+	 * @return toCurrencyISOCode
 	 * A getter for the toCurrencyISOCode field.
 	 */
 	public String getToCurrencyISOCode() {
@@ -147,7 +147,7 @@ public class FXDeal {
 	
 	
 	/**
-	 * @return LocalDateTime
+	 * @return dealTimestamp
 	 * A getter for the dealTimestamp field.
 	 */
 	public LocalDateTime getDealTimestamp() {
@@ -166,7 +166,7 @@ public class FXDeal {
 	
 	
 	/**
-	 * @return String
+	 * @return dealAmount
 	 * A getter for the dealAmount field.
 	 */
 	public String getDealAmount() {
