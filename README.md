@@ -12,15 +12,10 @@
 # Running the application
    To run the application, first of all you must pull the repository from GitHub in a folder
  then, go to the directory(context root) of the project and run the following commands. 
-  
-   If you're using Linux, use your terminal and enter the following commands: 
-    1. make build
-    2. docker-compose build
-    3. docker-compose up
     
-   Ensure that you have mingw32 installed on your machine.
+    If you're using Windows, ensure that you have mingw32 installed on your machine.
     
-   If you're using Windows, use your terminal and enter the following commands: 
+   Then, use your terminal and enter the following commands: 
     1. c:\mingw32-make.exe build
     2. docker-compose build
     3. docker-compose up
