@@ -15,15 +15,40 @@ import com.bloomberg.fxdealwarehouseapi.exceptions.IllegalDuplicateDealException
 import com.bloomberg.fxdealwarehouseapi.exceptions.InvalidDealFieldsException;
 import com.bloomberg.fxdealwarehouseapi.validations.FXDealValidator;
 
+/**
+ * The FXDealService class is a Service class that represents the business logic layer 
+ * in the application, which is to save the new FXDeal into the DB appropriately.
+ */
 @Service
 public class FXDealService {
 	private FXDealDAO fxDealDao;	
 	
+	/**
+	 * @param fxDealDao
+	 * A parameterized constructor that is used 
+	 * to Inject a bean instance of FXDealDAO Component type 
+	 * as a dependency(Constructor Injection) 
+	 * by the Spring framework context-core(IOC Container).
+	 */
 	public FXDealService(FXDealDAO fxDealDao) {
 		this.fxDealDao = fxDealDao;
 	}
 	
 	
+	/**
+	 * @param dealToImport
+	 * @return ResponseEntity<Object>
+	 * 
+	 * The saveDeal Method handles the business logic of the application, which is to 
+	 * insert the new FXDeal appropriately, in order to achieve that, the saveDeal Method 
+	 * starts with validating the FX Deal(dealToImport) and its fields by invoking the validateFXDeal from the 
+	 * FXDealValidator class, then, it invokes the saveDeal Method from the FXDealDAO class.
+	 * 
+	 * If there was any violation in the previous two steps, in situations like 
+	 * when the deal is not valid or when the deal already exists in the DB, a customized exception with a proper error message 
+	 * will be thrown and it will be handled in the saveDeal Method of FXDealService class
+	 * and a proper ResponseEntity, which represents the response will be returned to the RESTful Controller.
+	 */
 	public ResponseEntity<Object> saveDeal(FXDeal dealToImport) {
 		
 		Map<String, Object> responseMap = new HashMap<String, Object>();
@@ -53,7 +78,6 @@ public class FXDealService {
 			responseMap.put("mssg", e.getMessage());
 			return ResponseEntity.badRequest().body(responseMap);
 			
-//			return ResponseEntity.badRequest().body(e.getMessage());
 		}catch(IllegalDuplicateDealException e) {
 //			Logger (log out the exception)
 			FxDealWarehouseApiApplication.logger.info("[FXDealService: Bad Request: " + e.getClass().getName() + "]");
@@ -62,7 +86,6 @@ public class FXDealService {
 			responseMap.put("mssg", e.getMessage());
 			return ResponseEntity.badRequest().body(responseMap);
 			
-//			return ResponseEntity.badRequest().body(e.getMessage());
 		}catch(Exception e){
 //			Logger (log out the exception)
 			FxDealWarehouseApiApplication.logger.info("[FXDealService: Internal Server Error: " + e.getClass().getName() + "]");
@@ -71,7 +94,6 @@ public class FXDealService {
 			responseMap.put("mssg", e.getMessage());
 			return ResponseEntity.badRequest().body(responseMap);
 			
-//			return ResponseEntity.internalServerError().body(e.getMessage());
 		}
 	}
 }

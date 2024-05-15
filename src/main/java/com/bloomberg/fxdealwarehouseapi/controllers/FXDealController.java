@@ -1,7 +1,5 @@
 package com.bloomberg.fxdealwarehouseapi.controllers;
 
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +11,26 @@ import com.bloomberg.fxdealwarehouseapi.FxDealWarehouseApiApplication;
 import com.bloomberg.fxdealwarehouseapi.beans.FXDeal;
 import com.bloomberg.fxdealwarehouseapi.services.FXDealService;
 
+/**
+ * FXDealController is a RESTful Controller that is mapped to the path (/bloomberg/warehouse/fxdeal/).
+ * The FXDealController handles the RESTful request and represents the RESTful API of the FX Deal Warehouse System.
+ * It has fxDealService field of type FXDealService as a dependency bean instance to be injected 
+ * by Spring framework(Field Injection), to use the fxDealService bean instance to handle the 
+ * business logic layer.
+ */
 @RestController
 @RequestMapping("/bloomberg/warehouse/fxdeal/")
 public class FXDealController {
 	@Autowired
 	private FXDealService fxDealService;	
 	
+	/**
+	 * @param dealToImport
+	 * @return ResponseEntity<Object>
+	 * 
+	 * The saveDeal Method handles the requests to import the new FXDeals into the DB, and returns a proper response, which is returned 
+	 * by the saveDeal Method from the FXDealService that is invoked by the fxDealService bean instance.
+	 */
 	@PostMapping("save")
 	public ResponseEntity<Object> saveDeal(@RequestBody FXDeal dealToImport){
 		FxDealWarehouseApiApplication.logger.info("[FXDealController: Received a new RESTful POST request]");

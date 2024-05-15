@@ -12,8 +12,12 @@ import com.bloomberg.fxdealwarehouseapi.repositories.FXDealRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-//import org.springframework.data.jpa.repository.Query;
 
+/**
+ * This FXDealDAO class acts as an intermediate layer between the FXDealService and 
+ * the FXDealRepository, FXDealDAO checks if the deal already exists in the DB 
+ * before inserting it into the DB.
+ */
 @Component
 public class FXDealDAO {
 	private FXDealRepository fxDealRepository;
@@ -22,13 +26,32 @@ public class FXDealDAO {
 	@Autowired
 	private EntityManager entityManager;
 	
+	
+	/**
+	 * @param fxDealRepository
+	 * 
+	 * A parameterized constructor that is used 
+	 * to Inject a bean instance of FXDealRepository 
+	 * Component type, which is a Repository, 
+	 * as a dependency(Constructor Injection) 
+	 * by the Spring framework context-core(IOC Container).
+	 */
 	public FXDealDAO(FXDealRepository fxDealRepository){
 		this.fxDealRepository = fxDealRepository;		
 	}
+
 	
-//	@Query(value = "select from fxdeal where dealId = :dealId", nativeQuery = true)
-//	public List<FXDeal> findDealsById(int dealId);
-	
+	/**
+	 * @param newFxDeal
+	 * @throws IllegalDuplicateDealException
+	 * 
+	 * The saveDeal Method checks if the newFxDeal, that is received as a parameter, 
+	 * already exists in the DB, and if the deal already exists the saveDeal Method will throw a 
+	 * IllegalDuplicateDealException that will be handled properly in the FXDealService and the 
+	 * Service will return the appropriate response, otherwise, if the deal does not exist in the DB, 
+	 * the saveDeal Method in the FXDealRepository will be invoked and the deal will be inserted into the DB.
+	 * 
+	 */
 	public void saveDeal(FXDeal newFxDeal) throws IllegalDuplicateDealException{
 		FxDealWarehouseApiApplication.logger.info("[FXDealDAO: invoked saveDeal Method]");
 		
