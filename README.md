@@ -14,9 +14,9 @@
  then, go to the directory(context root) of the project and run the following commands. 
     
     If you're using Windows, ensure that you have mingw32 installed on your machine. Then, use your terminal and enter the following commands:
-    	1. c:\mingw32-make.exe build.
-     	2. docker-compose build.
-    	3. docker-compose up.
+    	1. c:\mingw32-make.exe build
+     	2. docker-compose build
+    	3. docker-compose up
   
    # Testing the application
        To test the API endpoint of the application that is used to save the deals into the DB by sending a POST request using the following path/URL: 
