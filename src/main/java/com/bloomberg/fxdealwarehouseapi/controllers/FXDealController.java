@@ -2,7 +2,7 @@ package com.bloomberg.fxdealwarehouseapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +31,7 @@ public class FXDealController {
 	 * The saveDeal Method handles the requests to import the new FXDeals into the DB, and returns a proper response, which is returned 
 	 * by the saveDeal Method from the FXDealService that is invoked by the fxDealService bean instance.
 	 */
-	@PostMapping("save")
+	@GetMapping("save")
 	public ResponseEntity<Object> saveDeal(@RequestBody FXDeal dealToImport){
 		FxDealWarehouseApiApplication.logger.info("[FXDealController: Received a new RESTful POST request]");
 		FxDealWarehouseApiApplication.logger.info("[FXDealController: Request Body(dealToImport): " +dealToImport + "]");
