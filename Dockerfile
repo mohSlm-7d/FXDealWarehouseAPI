@@ -1,16 +1,15 @@
-# Dockerfile
+#Dockerfile
 
-# Use OpenJDK 17 as the base image
-FROM adoptopenjdk/openjdk17:alpine-jre
+# Use openjdk eclipse base image
+FROM eclipse-temurin:17-jdk-alpine
 
-# Set the working directory in the container
-WORKDIR /app
+VOLUME tmp
 
 # Copy the packaged Spring Boot application JAR file into the container
-COPY target/fxdealwarehouseapi.jar /app/fxdealwarehouseapi.jar
-
-# Expose the port that the Spring Boot application will run on
-EXPOSE 8080
+COPY target/*.jar fxdealwarehouseapi.jar
 
 # Command to run the Spring Boot application when the container starts
-CMD ["java", "-jar", "fxdealwarehouseapi.jar"]
+ENTRYPOINT ["java", "-jar", "/fxdealwarehouseapi.jar"]
+
+# Use port 8080
+EXPOSE 9999:8080
