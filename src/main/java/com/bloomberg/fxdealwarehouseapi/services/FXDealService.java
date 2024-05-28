@@ -22,16 +22,17 @@ import com.bloomberg.fxdealwarehouseapi.validations.FXDealValidator;
 @Service
 public class FXDealService {
 	private FXDealDAO fxDealDao;	
-	
+	private FXDealValidator dealValidator;
 	/**
 	 * @param fxDealDao
 	 * A parameterized constructor that is used 
-	 * to Inject a bean instance of FXDealDAO Component type 
-	 * as a dependency(Constructor Injection) 
+	 * to Inject a bean instance of FXDealDAO and a bean instance of FXDealValidator Component types
+	 * as dependencies(Constructor Injection) 
 	 * by the Spring framework context-core(IOC Container).
 	 */
-	public FXDealService(FXDealDAO fxDealDao) {
+	public FXDealService(FXDealDAO fxDealDao, FXDealValidator dealValidator) {
 		this.fxDealDao = fxDealDao;
+		this.dealValidator = dealValidator;
 	}
 	
 	
@@ -58,8 +59,9 @@ public class FXDealService {
 			
 //			FX Deal Validation (ensuring that details(fields) of the deal are valid).
 			FxDealWarehouseApiApplication.logger.info("[FXDealService: Invoking the validateFXDeal Method from FXDealValidator.class]");
-			FXDealValidator dealValidator = new FXDealValidator();
-			dealValidator.validateFXDeal(dealToImport);
+//			FXDealValidator dealValidator = new FXDealValidator();
+//			dealValidator.validateFXDeal(dealToImport);
+			this.dealValidator.validateFXDeal(dealToImport);
 			
 			FxDealWarehouseApiApplication.logger.info("[FXDealService: Invoking the saveDeal Method from FXDealDAO.class]");
 			this.fxDealDao.saveDeal(dealToImport);

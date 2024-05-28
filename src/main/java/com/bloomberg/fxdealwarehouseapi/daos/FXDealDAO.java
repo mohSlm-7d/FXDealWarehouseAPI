@@ -23,7 +23,7 @@ public class FXDealDAO {
 	private FXDealRepository fxDealRepository;
 	
 	
-	@Autowired
+//	@Autowired
 	private EntityManager entityManager;
 	
 	
@@ -31,13 +31,15 @@ public class FXDealDAO {
 	 * @param fxDealRepository
 	 * 
 	 * A parameterized constructor that is used 
-	 * to Inject a bean instance of FXDealRepository 
-	 * Component type, which is a Repository, 
-	 * as a dependency(Constructor Injection) 
+	 * to Inject a bean instance of FXDealRepository which is a Repository, 
+	 * and a bean instance of EntityManager
+	 * Component type, 
+	 * as dependencies(Constructor Injection) 
 	 * by the Spring framework context-core(IOC Container).
 	 */
-	public FXDealDAO(FXDealRepository fxDealRepository){
-		this.fxDealRepository = fxDealRepository;		
+	public FXDealDAO(FXDealRepository fxDealRepository, EntityManager entityManager){
+		this.fxDealRepository = fxDealRepository;
+		this.entityManager = entityManager;
 	}
 
 	

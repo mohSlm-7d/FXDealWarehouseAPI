@@ -21,8 +21,25 @@ import com.bloomberg.fxdealwarehouseapi.services.FXDealService;
 @RestController
 @RequestMapping("/bloomberg/warehouse/fxdeal/")
 public class FXDealController {
-	@Autowired
+//	@Autowired
 	private FXDealService fxDealService;	
+	
+	
+	
+	/**
+	 * @param fxDealService
+	 * 
+	 * A parameterized constructor that is used 
+	 * to Inject a bean instance of FXDealService Component type,
+	 * which is a Service, 
+	 * as dependency(Constructor Injection) 
+	 * by the Spring framework context-core(IOC Container).
+	 */
+	public FXDealController(FXDealService fxDealService) {
+		// TODO Auto-generated constructor stub
+		this.fxDealService = fxDealService;
+	}
+	
 	
 	/**
 	 * @param dealToImport
