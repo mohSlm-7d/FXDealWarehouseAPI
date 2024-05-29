@@ -18,6 +18,7 @@ public class FxDealWarehouseApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FxDealWarehouseApiApplication.class, args);
 		logger.info("[FxDealWarehouseApiApplication: Started FxDealWarehouseApiApplication Application]");
+		FxDealWarehouseApiApplication.logger.info("[FxDealWarehouseApiApplication: Note: LiveReload enabled by adding Spring DevTools dependency]");
 		logger.info("[Time: " + Timestamp.valueOf(LocalDateTime.now()).toString() + "]");
 	}
 
